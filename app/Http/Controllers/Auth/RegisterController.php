@@ -62,11 +62,20 @@ class RegisterController extends Controller
      * @return \App\Models\User
      */
     protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+{
+    $user = User::create([
+        'name' => $data['name'],
+        'email' => $data['email'],
+        'password' => Hash::make($data['password']),
+    ]);
+
+    // Jika email adalah "admin@gmail.com", ubah $this->redirectTo
+    if ($user->email === 'admin@gmail.com') {
+        $this->redirectTo = '/home'; // Redirect ke /users/home
+    } else {
+        $this->redirectTo = 'users/home'; // Redirect default ke /home
     }
+
+    return $user;
+}
 }
