@@ -18,7 +18,6 @@
             <!-- Sidebar scroll-->
             <div>
                 <div class="">
-
                     <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                         <i class="ti ti-x fs-8"></i>
                     </div>
@@ -39,11 +38,11 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link {{ request()->is('daftar*') ? 'active' : '' }}" href="/users/check" aria-expanded="false">
+                            <a class="sidebar-link" href="/users/prediksi" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-clipboard"></i>
                                 </span>
-                                <span class="hide-menu">Check Stress</span>
+                                <span class="hide-menu">Prediksi</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -51,7 +50,7 @@
                                 <span>
                                     <i class="ti ti-user-exclamation"></i>
                                 </span>
-                                <span class="hide-menu">Riwayat Stress</span>
+                                <span class="hide-menu">Riwayat Prediksi</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -62,7 +61,6 @@
                                 <span class="hide-menu">Artikel</span>
                             </a>
                         </li>
-                        
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -115,8 +113,7 @@
                                             <i class="ti ti-list-check fs-6"></i>
                                             <p class="mb-0 fs-3">My Task</p>
                                         </a>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="if(confirm('Anda yakin keluar?')) { event.preventDefault(); document.getElementById('logout-form').submit(); } else { return false; }"
+                                        <a href="{{ route('logout') }}" onclick="handleLogout(event)"
                                             class="btn btn-outline-primary mx-3 mt-2 d-block">
                                             <i class="ti ti-logout me-2"></i>Logout
                                         </a>
@@ -148,6 +145,26 @@
     <script src="/modern/src/assets/js/sidebarmenu.js"></script>
     <script src="/modern/src/assets/js/app.min.js"></script>
     <script src="/modern/src/assets/libs/simplebar/dist/simplebar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function handleLogout(event) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Anda yakin ingin keluar?',
+                text: "Anda akan keluar dari sesi ini.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, keluar',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('logout-form').submit();
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

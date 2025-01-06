@@ -7,6 +7,7 @@
     <title>{{ $title ?? '' }}</title>
     <link rel="shortcut icon" type="image/png" href="/modern/src/assets/images/logos/favicon.png" />
     <link rel="stylesheet" href="/modern/src/assets/css/styles.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -18,7 +19,6 @@
             <!-- Sidebar scroll-->
             <div>
                 <div class="">
-                    
                     <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                         <i class="ti ti-x fs-8"></i>
                     </div>
@@ -39,9 +39,10 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link {{ request()->is('daftar*') ? 'active' : '' }}" href="/users" aria-expanded="false">
+                            <a class="sidebar-link {{ request()->is('daftar*') ? 'active' : '' }}" href="/users"
+                                aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-user-exclamation"></i> 
+                                    <i class="ti ti-user-exclamation"></i>
                                 </span>
                                 <span class="hide-menu">Daftar Pengguna</span>
                             </a>
@@ -54,7 +55,7 @@
                                 <span class="hide-menu">Artikel</span>
                             </a>
                         </li>
-                    </nav>
+                </nav>
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
@@ -105,8 +106,7 @@
                                             <i class="ti ti-list-check fs-6"></i>
                                             <p class="mb-0 fs-3">My Task</p>
                                         </a>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="if(confirm('Anda yakin keluar?')) { event.preventDefault(); document.getElementById('logout-form').submit(); } else { return false; }"
+                                        <a href="javascript:void(0)" id="logout-button"
                                             class="btn btn-outline-primary mx-3 mt-2 d-block">
                                             <i class="ti ti-logout me-2"></i>Logout
                                         </a>
@@ -138,6 +138,25 @@
     <script src="/modern/src/assets/js/sidebarmenu.js"></script>
     <script src="/modern/src/assets/js/app.min.js"></script>
     <script src="/modern/src/assets/libs/simplebar/dist/simplebar.js"></script>
+    <script>
+        document.getElementById('logout-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Anda yakin ingin keluar?',
+                text: "Anda akan keluar dari sesi ini.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, keluar!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('logout-form').submit();
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
